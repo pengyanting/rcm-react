@@ -7,23 +7,49 @@ class UserMadol extends React.Component {
   constructor(props) {
     super(props);
     this.handleOk = () => {
-      const value = this.props.form.getFieldsValue();
-      console.log(value);
       this.props.form.validateFields((err, values) => {
-        console.log(values);
         if (!err) {
-          console.log('Received values of form: ', values);
+          let type = 'create';
+          if (this.props.modalType === 'create') {
+            type = 'users/create';
+          } else if (this.props.modalType === 'update') {
+            type = 'users/update';
+            values.id = this.props.formValue.id;
+          }
+          this.props.dispatch({
+            type: type,
+            payload: values
+          });
+          return
         }
       });
-      // this.props.dispatch({
-      //   type: 'users/hideModal',
-      // });
     };
     this.handleCancel = () => {
       this.props.dispatch({
         type: 'users/hideModal',
       });
     };
+  }
+  componentWillMount () {
+  }
+  componentWillReceiveProps (nextprops) {
+    if (this.props.formValue === nextprops.formValue) {
+      return;
+    }
+    this.props.form.setFields({
+      userName: {
+        value: nextprops.formValue.name,
+      },
+      age: {
+        value: nextprops.formValue.age,
+      },
+      address: {
+        value: nextprops.formValue.address,
+      },
+      id: {
+        value: nextprops.formValue.id,
+      },
+    });
   }
   render() {
     const formItemLayout = {
@@ -51,9 +77,9 @@ class UserMadol extends React.Component {
             hasFeedback
           >
             {getFieldDecorator('userName', {
-              rules: [{ required: true, message: 'Please input your username!' }],
+              rules: [{ required: true, message: 'Please input username!' }],
             })(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />,
+              <Input placeholder="Username" />,
             )}
           </FormItem>
           <FormItem
@@ -61,8 +87,10 @@ class UserMadol extends React.Component {
             label="年龄"
             hasFeedback
           >
-            {getFieldDecorator('age', {})(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />,
+            {getFieldDecorator('age', {
+              rules: [{ required: true, message: 'Please input age!' }]
+            })(
+              <Input placeholder="Age" />,
             )}
           </FormItem>
           <FormItem
@@ -70,8 +98,10 @@ class UserMadol extends React.Component {
             label="住址"
             hasFeedback
           >
-            {getFieldDecorator('address', {})(
-              <Input prefix={<Icon type="user" style={{ fontSize: 13 }} />} placeholder="Username" />,
+            {getFieldDecorator('address', {
+              rules: [{ required: true, message: 'Please input address!' }]
+            })(
+              <Input placeholder="Address" />,
             )}
           </FormItem>
         </Form>

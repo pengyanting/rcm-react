@@ -12,7 +12,10 @@ class UserSearch extends React.Component {
     this.onAdd = () => {
       this.props.dispatch({
         type: 'users/showModal',
-        payload: {},
+        payload: {
+          modalType: 'create', 
+          record: {},
+        },
       });
     };
   }

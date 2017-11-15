@@ -6,13 +6,14 @@ import UserModal from '../components/Users/UserModal';
 import * as styles from './User.css';
 
 function Users({ location, dispatch, users }) {
-  const { total, current, loading, dataSource, modalVisible } = users;
+  const { total, current, loading, dataSource, modalVisible, modalType, formValue } = users;
   const UserListProps = {
     total,
     current,
     loading,
     dataSource,
     dispatch,
+    modalType,
   };
   const UserSearchProps = {
     modalVisible,
@@ -21,6 +22,8 @@ function Users({ location, dispatch, users }) {
   const UserModalProps = {
     modalVisible,
     dispatch,
+    modalType,
+    formValue,
   };
   return (
     <div className={styles.normal}>
