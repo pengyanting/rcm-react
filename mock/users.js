@@ -7,11 +7,9 @@ function getIndex(id, arr) {
   let num;
   arr.map((item, index) => {
     if (item.id === id) {
-      console.log(index);
       num = index;
     }
   });
-  console.log(num)
   return num;
 }
 const data = mockjs.mock({
