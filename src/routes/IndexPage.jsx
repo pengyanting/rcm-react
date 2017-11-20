@@ -75,4 +75,4 @@ class SiderLayout extends React.Component {
 
 SiderLayout.propTypes = {};
 
-export default connect(({ example }) => ({ example }))(SiderLayout);
+export default connect(({ pageIndex }) => ({ pageIndex }))(SiderLayout);

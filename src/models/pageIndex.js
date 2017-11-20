@@ -1,5 +1,5 @@
 export default {
-  namespace: 'example',
+  namespace: 'pageIndex',
   state: {},
   subscriptions: {
     setup({dispatch, history}) { // eslint-disable-line

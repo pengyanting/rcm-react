@@ -4,7 +4,7 @@ import { routerRedux } from 'dva/router';
 import { userLogin } from '../services/login';
 
 export default {
-  namespace: 'login',
+  namespace: 'system',
   state: {
     loginLoading: false,
   },
@@ -12,7 +12,6 @@ export default {
   },
   effects: {
     *login({ payload }, { call, put }) {
-      console.log(payload);
       const { data } = yield call(userLogin, payload);
       if (data) {
         if (data.success) {
