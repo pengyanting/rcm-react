@@ -19,5 +19,14 @@ const tool = {
       document.cookie = `${name}=; expires=Thu, 01-Jan-70 00:00:01 GMT; path=${path}; domain=${domain}`;
     }
   },
+  getIndex(id, arr) {
+    let num;
+    arr.forEach((item, index) => {
+      if (item.id === id) {
+        num = index;
+      }
+    });
+    return num;
+  },
 };
 export default tool;

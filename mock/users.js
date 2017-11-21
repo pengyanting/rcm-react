@@ -1,23 +1,22 @@
+import tool from '../src/utils/tool';
+
 const qs = require('qs');
 
 // 引入 mock js
 const mockjs = require('mockjs');
 
-function getIndex(id, arr) {
-  let num;
-  arr.map((item, index) => {
-    if (item.id === id) {
-      num = index;
-    }
-  });
-  return num;
-}
 const data = mockjs.mock({
   'data|100': [{
     'id|+1': 1,
-    name: '@cname',
-    'age|11-99': 1,
-    address: '@region',
+    loginName: '@cname',
+    realName: '@name',
+    gender: `@character(${'FMN'})`,
+    'mobileNumber|11': `@character(${'number'})`,
+    enabled:'@boolean',
+    birthday: '@date',
+    email: '@email',
+    'password|6': 'number',
+    'componeyNumber|11': `@character(${'number'})`,
   }],
   page: {
     total: 100,
@@ -54,7 +53,7 @@ module.exports = {
     });
   },
   'POST /api/users/update'(req, res) {
-    const index = getIndex(req.body.id, data.data);
+    const index = tool.getIndex(req.body.id, data.data);
     data.data[index] = {
       id: req.body.id,
       name: req.body.userName,
@@ -72,7 +71,7 @@ module.exports = {
   },
   'GET /api/users/del'(req, res) {
     const id = qs.parse(req.query).id;
-    const index = getIndex(id, data.data)
+    const index = tool.getIndex(id, data.data)
     data.data.splice(index, 1);
     res.json({
       success: true,

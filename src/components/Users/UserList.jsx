@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, message, Popconfirm } from 'antd';
+import { Table, message, Popconfirm, Tag } from 'antd';
 
 class UserList extends React.Component {
   constructor(props) {
@@ -32,18 +32,26 @@ class UserList extends React.Component {
   }
   render() {
     const columns = [{
-      title: 'ID',
-      dataIndex: 'id',
+      title: '登录名',
+      dataIndex: 'loginName',
     }, {
-      title: '姓名',
-      dataIndex: 'name',
-      render: text => <a href="#">{text}</a>,
+      title: '真实姓名',
+      dataIndex: 'realName',
     }, {
-      title: '年龄',
-      dataIndex: 'age',
+      title: '性别',
+      dataIndex: 'gender',
     }, {
-      title: '住址',
-      dataIndex: 'address',
+      title: '手机号码',
+      dataIndex: 'mobileNumber',
+    }, {
+      title: '邮箱',
+      dataIndex: 'email',
+    }, {
+      title: '状态',
+      dataIndex: 'enabled',
+      render: (text, record) => (
+        <Tag color={record.enabled ? 'green' : 'red'}>{record.enabled ? '启用' : '禁用'}</Tag>
+      ),
     }, {
       title: '操作',
       render: (text, record) => (
