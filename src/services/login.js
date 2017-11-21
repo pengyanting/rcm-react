@@ -2,7 +2,6 @@
 import request from '../utils/request';
 
 export async function userLogin(params) {
-  console.log(params);
   return request('/api/login', {
     method: 'POST',
     headers: {
