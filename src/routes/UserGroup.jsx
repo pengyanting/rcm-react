@@ -3,7 +3,6 @@ import { connect } from 'dva';
 import UserGroupList from '../components/UserGroup/UserGroupList';
 
 function UserGroup({ location, dispatch, userGroup }) {
-  console.log(userGroup);
   const { dataSource, total, current, loading } = userGroup;
   const UserGroupListProps = {
     dispatch,

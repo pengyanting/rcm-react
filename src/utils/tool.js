@@ -22,11 +22,35 @@ const tool = {
   getIndex(id, arr) {
     let num;
     arr.forEach((item, index) => {
-      if (item.id === id) {
+      const itemId = item.id + '';
+      const ids = id + '';
+      if (itemId === ids) {
         num = index;
       }
     });
     return num;
+  },
+  Filter(list, value, key) {
+    let tmpProducts = [];
+    if (!value) {
+      tmpProducts = list;
+    } else {
+      tmpProducts = list.filter((item) => {
+        return item[key] === value;
+      });
+    }
+    return tmpProducts;
+  },
+  doFilter(products, conditions) {
+    // 根据条件循环调用筛选器里的方法
+    let list = products;
+    for (const key in conditions) {
+      // 判断是否有需要的过滤方法
+      if (true) {
+        list = this.Filter(list, conditions[key], key);
+      }
+    }
+    return list;
   },
 };
 export default tool;

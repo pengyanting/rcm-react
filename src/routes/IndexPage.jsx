@@ -64,7 +64,7 @@ class SiderLayout extends React.Component {
               onClick={this.toggle}
             />
           </Header>
-          <Content style={{ padding: 24, background: '#fff', minHeight: 280 }}>
+          <Content style={{ padding: '0 24px', background: '#fff', minHeight: 280 }}>
             {this.props.children}
           </Content>
         </Layout>
