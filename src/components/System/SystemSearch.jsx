@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Input, Row, Col, Button } from 'antd';
+import { Form, Input, Row, Col, Button, message } from 'antd';
 
 const FormItem = Form.Item
 class SystemSearch extends React.Component {
@@ -22,6 +22,10 @@ class SystemSearch extends React.Component {
       });
     }
     this.handleDel = () => {
+      if (!this.props.selectId) {
+        message.warning('请选择要操作的系统');
+        return;
+      }
       this.props.dispatch({
         type: 'system/del',
         payload: {
@@ -30,6 +34,10 @@ class SystemSearch extends React.Component {
       });
     },
     this.handleChangeStatus = (state) => {
+      if (!this.props.selectId) {
+        message.warning('请选择要操作的系统');
+        return;
+      }
       this.props.dispatch({
         type: 'system/changeStatus',
         payload: {

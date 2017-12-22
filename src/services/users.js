@@ -28,3 +28,14 @@ export async function update(params) {
 export async function del(params) {
   return request(`/api/users/del?${qs.stringify(params)}`);
 }
+
+export async function changeStatus(params) {
+  return request('/api/users/changeStatus', {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(params),
+  });
+}

@@ -5,7 +5,8 @@ import UserSearch from '../components/Users/UserSearch';
 import UserModal from '../components/Users/UserModal';
 
 function Users({ location, dispatch, users }) {
-  const { total, current, loading, dataSource, modalVisible, modalType, formValue } = users;
+  const { total, loading, dataSource, modalVisible, modalType, formValue, searchForm, selectId } = users;
+  const { current } = searchForm;
   const UserListProps = {
     total,
     current,
@@ -13,10 +14,13 @@ function Users({ location, dispatch, users }) {
     dataSource,
     dispatch,
     modalType,
+    searchForm,
   };
   const UserSearchProps = {
     modalVisible,
     dispatch,
+    current,
+    selectId,
   };
   const UserModalProps = {
     modalVisible,

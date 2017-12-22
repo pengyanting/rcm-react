@@ -29,6 +29,15 @@ class UserList extends React.Component {
         },
       });
     };
+    this.handleChangeStatus = (record) => {
+      this.props.dispatch({
+        type: 'users/changeState',
+        payload: {
+          id: record.id,
+          enabled: !record.enabled,
+        }
+      });
+    }
   }
   render() {
     const columns = [{
@@ -40,6 +49,17 @@ class UserList extends React.Component {
     }, {
       title: '性别',
       dataIndex: 'gender',
+      render: (text, record) => {
+        let gender = '未知';
+        if (record.gender === 'M') {
+          gender = '男';
+        } else if (record.gender === 'F') {
+          gender = '女';
+        } else {
+          gender = '未知';
+        }
+        return (<p>{gender}</p>)
+      }
     }, {
       title: '手机号码',
       dataIndex: 'mobileNumber',
@@ -56,21 +76,40 @@ class UserList extends React.Component {
       title: '操作',
       render: (text, record) => (
         <p>
-          <a onClick={() => { this.doAdd(record); }}>编辑</a>
+          <a style={{marginRight: '10px'}} onClick={() => { this.doAdd(record); }}>编辑</a>
+          <a onClick={() => { this.handleChangeStatus(record); }}>{record.enabled?'禁用':'启用'}</a>
           &nbsp;
-          <Popconfirm title="确定要删除吗？" onConfirm={() => { this.del(record.id) }}>
-            <a>删除</a>
-          </Popconfirm>
         </p>
       ),
     }];
     const { total, current, loading, dataSource } = this.props;
     // 定义分页对象
+    function showTotal(total) {
+      return `Total ${total} items`;
+    }
     const pagination = {
       total,
       current,
       pageSize: 10,
       onChange: this.onChange,
+      showTotal: showTotal
+    };
+    const rowSelection = {
+      onChange: (selectedRowKeys, selectedRows) => {
+        let ids = [];
+        selectedRows.forEach((item) => {
+          ids.push(item.id)
+        })
+        this.props.dispatch({
+          type: 'users/getSelection',
+          payload: {
+            selectId: ids.join(','),
+          }
+        })
+      },
+      getCheckboxProps: record => ({
+        // defaultChecked: record.loginName === 'Larry Jackson',
+      }),
     };
     return (
       <div>
@@ -80,6 +119,7 @@ class UserList extends React.Component {
           loading={loading}
           pagination={pagination}
           rowKey={ record => record.id }
+          rowSelection = { rowSelection }
         />
       </div>
     );

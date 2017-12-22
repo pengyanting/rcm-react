@@ -17,16 +17,16 @@ export const groupData = mockjs.mock({
 });
 
 export const userData = mockjs.mock({
-    'data|100': [{
+    'data|15': [{
       'id|+1': 1,
-      loginName: '@cname',
-      realName: '@name',
+      loginName: '@name',
+      realName: '@cname',
       gender: `@character(${'FMN'})`,
       'mobileNumber|11': `@character(${'number'})`,
-      enabled:'@boolean',
+      enabled: '@boolean',
       birthday: '@date',
       email: '@email',
-      'password|6': 'number',
+      'password|6': `@character(${'number'})`,
       'componeyNumber|11': `@character(${'number'})`,
     }],
     page: {
