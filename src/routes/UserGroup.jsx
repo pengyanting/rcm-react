@@ -1,19 +1,49 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'dva';
 import UserGroupList from '../components/UserGroup/UserGroupList';
+import UserGroupSearch from '../components/UserGroup/UserGroupSearch';
+import AddMadol from '../components/UserGroup/AddModal';
 
 function UserGroup({ location, dispatch, userGroup }) {
-  const { dataSource, total, current, loading } = userGroup;
+  const {
+    dataSource,
+    total,
+    current,
+    loading,
+    groupList,
+    parentId,
+    selectId,
+    addModalShow,
+    modalType,
+    formValue,
+  } = userGroup;
   const UserGroupListProps = {
     dispatch,
     dataSource,
     total,
     current,
     loading,
+    parentId,
+    addModalShow,
   };
+  const UserGroupSearchProps = {
+    dispatch,
+    groupList,
+    current,
+    selectId,
+  }
+  const AddMadolProps = {
+    dispatch,
+    addModalShow,
+    modalType,
+    formValue,
+    parentId,
+  }
   return (
     <div>
+      <UserGroupSearch {...UserGroupSearchProps} />
       <UserGroupList {...UserGroupListProps} />
+      <AddMadol {...AddMadolProps} />
     </div>
   );
 }

@@ -1,21 +1,50 @@
 import mockjs from 'mockjs';
 
-export const groupData = mockjs.mock({
-  'data|33': [{
+export const groupDataLevel1 = mockjs.mock({
+  'data|5': [{
     'id|+1': 1,
     name: `@cword(${4,6})机构`,
     code: `@string(${'lower', 5})_@character(${'number'})`,
     'type|1': ['ORGANIZATION', 'USERGROUP', 'POSITION'],
     enabled: '@boolean',
-    parentId: null,
-    remark: `@paragraph(${2})`,
+    'parentNode': null,
+    remark: `@paragraph(${1})`,
   }],
   page: {
-    total: 100,
+    total: 33,
     current: 1,
   },
 });
-
+export const groupDataLevel2 = mockjs.mock({
+  'data|30': [{
+    'id|+1': 1,
+    name: `@cword(${4,6})机构`,
+    code: `@string(${'lower', 5})_@character(${'number'})`,
+    'type|1': ['ORGANIZATION', 'USERGROUP', 'POSITION'],
+    enabled: '@boolean',
+    'parentNode|1': groupDataLevel1.data,
+    remark: `@paragraph(${1})`,
+  }],
+  page: {
+    total: 33,
+    current: 1,
+  },
+});
+export const groupDataLevel3 = mockjs.mock({
+  'data|15': [{
+    'id|+1': 1,
+    name: `@cword(${4,6})机构`,
+    code: `@string(${'lower', 5})_@character(${'number'})`,
+    'type|1': ['ORGANIZATION', 'USERGROUP', 'POSITION'],
+    enabled: '@boolean',
+    'parentNode|1': groupDataLevel2.data,
+    remark: `@paragraph(${1})`,
+  }],
+  page: {
+    total: 33,
+    current: 1,
+  },
+});
 export const userData = mockjs.mock({
     'data|15': [{
       'id|+1': 1,
